@@ -21,9 +21,11 @@
 }
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden}
 .hidden{display:none!important}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-
-/* ── TOAST BANNER ── */
+#loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999}
+#loading-screen .logo-flame{font-size:52px;color:var(--accent)}
+#loading-screen p{color:var(--text2);font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 #toast-container{position:fixed;top:0;left:0;right:0;z-index:9999;pointer-events:none;display:flex;flex-direction:column;align-items:center;padding:10px 12px;gap:8px}
 .toast{background:#1a0a00;border:2px solid var(--danger-text);border-radius:var(--radius);padding:14px 18px;max-width:440px;width:100%;pointer-events:all;display:flex;align-items:flex-start;gap:12px;box-shadow:0 8px 32px rgba(0,0,0,.7);animation:slideDown .3s ease;transition:opacity .3s}
 .toast.fading{opacity:0}
@@ -33,10 +35,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .toast-msg{font-size:14px;color:var(--text);font-weight:500}
 .toast-sub{font-size:12px;color:var(--text2);margin-top:2px}
 .toast-close{font-size:18px;color:var(--text3);cursor:pointer;padding:2px;flex-shrink:0}
-.toast-close:hover{color:var(--text)}
 @keyframes slideDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── AUTH ── */
 #auth-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:20px}
 .logo-block{text-align:center}
 .logo-flame{font-size:52px;color:var(--accent);line-height:1}
@@ -68,14 +67,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
 .user-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;max-height:220px;overflow-y:auto}
 .user-chip{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.2s}
-.user-chip:hover,.user-chip.sel{border-color:var(--accent);background:var(--accent-bg)}
+.user-chip:hover{border-color:var(--accent);background:var(--accent-bg)}
 .user-chip-name{font-size:14px;font-weight:500}
 .user-chip-role{font-size:11px;color:var(--text2)}
 .auth-divider{text-align:center;font-size:12px;color:var(--text3);margin:6px 0}
 .err-msg{background:var(--danger-bg);border:1px solid var(--danger-text);color:var(--danger-text);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;margin-bottom:10px}
 .ok-msg{background:var(--success-bg);border:1px solid var(--success-text);color:var(--success-text);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;margin-bottom:10px}
-
-/* ── APP ── */
 #app{display:none;flex-direction:column;min-height:100vh}
 .top-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .bar-left{display:flex;align-items:center;gap:8px}
@@ -94,8 +91,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .screen{display:none;animation:fadeIn .15s ease}
 .screen.active{display:block}
 @keyframes fadeIn{from{opacity:.6;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── CARDS ── */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:12px}
 .card-title{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.5px}
 .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
@@ -119,9 +114,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .bw{background:var(--warn-bg);color:var(--warn-text)}
 .bd{background:var(--danger-bg);color:var(--danger-text)}
 .bi{background:var(--info-bg);color:var(--info-text)}
-
-/* ── TASK ITEMS ── */
-.task-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px;transition:.2s}
+.task-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;display:flex;align-items:center;gap:10px;transition:.2s}
 .task-item.done{opacity:.45;border-style:dashed}
 .task-check{width:30px;height:30px;border-radius:50%;border:2px solid var(--border2);background:var(--bg3);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:.2s}
 .task-check.chk{background:var(--success-text);border-color:var(--success-text);color:#fff}
@@ -136,8 +129,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .tag-d{border-color:var(--danger-text);color:var(--danger-text);background:var(--danger-bg)}
 .del-btn{background:none;border:none;color:var(--text3);cursor:pointer;padding:4px;font-size:16px;border-radius:6px;flex-shrink:0;touch-action:manipulation;transition:.15s}
 .del-btn:hover,.del-btn:active{color:var(--danger-text);background:var(--danger-bg)}
-
-/* ── INVENTORY ── */
 .inv-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px}
 .inv-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
 .inv-name{font-size:14px;font-weight:500;flex:1;min-width:0}
@@ -148,8 +139,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .sbt.ok.a{background:var(--success-bg);border-color:var(--success-text);color:var(--success-text)}
 .sbt.lo.a{background:var(--warn-bg);border-color:var(--warn-text);color:var(--warn-text)}
 .sbt.cr.a{background:var(--danger-bg);border-color:var(--danger-text);color:var(--danger-text)}
-
-/* ── ALERTS ── */
 .alert-item{background:var(--bg2);border-left:3px solid var(--danger-text);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px}
 .alert-item.resolved{border-left-color:var(--success-text);opacity:.5}
 .alert-item.warn{border-left-color:var(--warn-text)}
@@ -166,12 +155,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .atype-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 8px;text-align:center;cursor:pointer;transition:.15s;font-size:12px;color:var(--text2);touch-action:manipulation}
 .atype-btn.sel{border-color:var(--danger-text);background:var(--danger-bg);color:var(--danger-text)}
 .atype-btn i{display:block;font-size:20px;margin-bottom:4px}
-
-/* ── OWNER STRIP ── */
 .owner-strip{background:var(--accent-bg);border:1px dashed var(--accent);border-radius:var(--radius-sm);padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:12px;font-size:13px;color:var(--accent);touch-action:manipulation;font-weight:500}
 .owner-strip:active{background:var(--accent);color:#fff}
-
-/* ── ADMIN ── */
 .admin-sec{margin-bottom:24px}
 .admin-sec h3{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
 .admin-row{display:flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 12px;margin-bottom:6px}
@@ -182,27 +167,20 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .btn-sm.s{border-color:var(--success-text);color:var(--success-text);background:var(--success-bg)}
 .btn-add{width:100%;background:var(--accent-bg);border:1px dashed var(--accent);border-radius:var(--radius-sm);padding:11px;color:var(--accent);font-size:13px;font-weight:500;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px;touch-action:manipulation}
 .btn-add:active{background:var(--accent);color:#fff}
-
-/* ── MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg2);border-radius:var(--radius) var(--radius) 0 0;padding:20px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto}
 .modal h3{font-size:16px;font-weight:700;margin-bottom:14px}
 .modal input,.modal select,.modal textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:11px 13px;color:var(--text);font-size:14px;margin-bottom:10px;outline:none}
-.modal input:focus,.modal select:focus{border-color:var(--accent)}
+.modal input:focus{border-color:var(--accent)}
 .modal-footer{display:flex;gap:8px;margin-top:4px}
 .modal-footer button{flex:1}
-
-/* ── REPORT ── */
 .rpt-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
 .rpt-row:last-child{border-bottom:none}
 .rpt-label{font-size:13px;color:var(--text2)}
 .rpt-val{font-size:13px;font-weight:600}
 .rpt-val.g{color:var(--success-text)}.rpt-val.r{color:var(--danger-text)}
-
-/* ── NOTIF BANNER (in-app) ── */
 .notif-banner{background:var(--info-bg);border:1px solid var(--info-text);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:10px;font-size:13px;color:var(--info-text);display:flex;align-items:center;gap:8px}
-
 @media(min-width:640px){
   .stat-grid{grid-template-columns:repeat(4,1fr)}
   .role-grid{grid-template-columns:repeat(4,1fr)}
@@ -213,11 +191,18 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 </head>
 <body>
 
-<!-- TOAST CONTAINER -->
 <div id="toast-container"></div>
 
+<!-- LOADING -->
+<div id="loading-screen">
+  <div class="logo-flame"><i class="ti ti-flame"></i></div>
+  <div style="font-size:20px;font-weight:700">Ahuvas Grill Express</div>
+  <div class="spinner"></div>
+  <p>Loading...</p>
+</div>
+
 <!-- AUTH -->
-<div id="auth-screen">
+<div id="auth-screen" class="hidden">
   <div class="logo-block">
     <div class="logo-flame"><i class="ti ti-flame"></i></div>
     <div class="logo-name">Ahuvas Grill Express</div>
@@ -228,18 +213,17 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <div class="auth-tab active" id="tab-signin" onclick="authSwitch('signin')">Sign in</div>
       <div class="auth-tab" id="tab-create" onclick="authSwitch('create')">Create account</div>
     </div>
-    <!-- SIGN IN -->
     <div class="auth-section active" id="sec-signin">
       <div id="signin-err"></div>
       <div id="user-list-wrap">
         <div class="field-label">Choose your account</div>
         <div class="user-list" id="user-chips"></div>
-        <div class="auth-divider">— or search by name —</div>
+        <div class="auth-divider">— or search —</div>
         <input class="field-input" id="si-name" placeholder="Type your name..." oninput="filterUsers()" autocomplete="off">
       </div>
       <div id="pin-step" class="hidden">
         <div class="field-label">PIN for <span id="si-name-show" style="color:var(--accent)"></span></div>
-        <div class="pin-display" id="si-pin-dots">
+        <div class="pin-display">
           <div class="pin-dot" id="si-p0"></div><div class="pin-dot" id="si-p1"></div>
           <div class="pin-dot" id="si-p2"></div><div class="pin-dot" id="si-p3"></div>
         </div>
@@ -248,7 +232,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <div class="auth-divider" style="margin-top:10px"><span style="cursor:pointer;color:var(--accent)" onclick="cancelPin()">← Back</span></div>
       </div>
     </div>
-    <!-- CREATE -->
     <div class="auth-section" id="sec-create">
       <div id="create-err"></div><div id="create-ok"></div>
       <input class="field-input" id="cr-name" placeholder="Full name">
@@ -282,15 +265,11 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <span class="bar-user" id="bar-user">—</span>
     </div>
     <div class="bar-right">
-      <button class="icon-btn" onclick="navTo('alerts')" aria-label="Alerts">
-        <i class="ti ti-bell"></i><div class="bdot" id="alert-dot"></div>
-      </button>
-      <button class="icon-btn" onclick="signOut()" aria-label="Sign out"><i class="ti ti-logout"></i></button>
+      <button class="icon-btn" onclick="navTo('alerts')"><i class="ti ti-bell"></i><div class="bdot" id="alert-dot"></div></button>
+      <button class="icon-btn" onclick="signOut()"><i class="ti ti-logout"></i></button>
     </div>
   </div>
-
   <div class="content">
-    <!-- DASHBOARD -->
     <div class="screen active" id="screen-dashboard">
       <div class="sec-hdr"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
       <div id="owner-notifs"></div>
@@ -307,25 +286,15 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin:8px 0 3px"><span>Closing</span><span id="d-pc">0%</span></div>
         <div class="progress-bar"><div class="progress-fill pf-o" id="pb-c" style="width:0%"></div></div>
       </div>
-      <div class="card">
-        <div class="card-title"><i class="ti ti-alert-triangle"></i>Active alerts</div>
-        <div id="d-alerts-list"></div>
-      </div>
-      <div class="card">
-        <div class="card-title"><i class="ti ti-truck"></i>Ordering reminders</div>
-        <div id="d-orders"></div>
-      </div>
+      <div class="card"><div class="card-title"><i class="ti ti-alert-triangle"></i>Active alerts</div><div id="d-alerts-list"></div></div>
+      <div class="card"><div class="card-title"><i class="ti ti-truck"></i>Ordering reminders</div><div id="d-orders"></div></div>
     </div>
-
-    <!-- OPENING -->
     <div class="screen" id="screen-opening">
       <div class="sec-hdr"><i class="ti ti-sun"></i>Opening checklist</div>
       <div id="o-owner-add"></div>
       <div class="tab-row" id="open-tabs"></div>
       <div id="open-list"></div>
     </div>
-
-    <!-- CLOSING -->
     <div class="screen" id="screen-closing">
       <div class="sec-hdr"><i class="ti ti-moon"></i>Closing checklist</div>
       <div id="c-owner-add"></div>
@@ -335,16 +304,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
         <div id="ready-list"></div>
       </div>
     </div>
-
-    <!-- STOCK -->
     <div class="screen" id="screen-inventory">
       <div class="sec-hdr"><i class="ti ti-packages"></i>Stock checklist</div>
       <div id="i-owner-add"></div>
       <div class="tab-row" id="inv-tabs"></div>
       <div id="inv-list"></div>
     </div>
-
-    <!-- ALERTS -->
     <div class="screen" id="screen-alerts">
       <div class="sec-hdr"><i class="ti ti-bell"></i>Alerts</div>
       <div class="card">
@@ -361,21 +326,17 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       <div class="sec-hdr" style="font-size:16px;margin-top:4px"><i class="ti ti-history"></i>Alert log</div>
       <div id="alert-log"></div>
     </div>
-
-    <!-- REPORTS -->
     <div class="screen" id="screen-reports">
       <div class="sec-hdr"><i class="ti ti-chart-pie"></i>Reports</div>
       <div class="card"><div class="card-title">Today's summary</div><div id="rpt-today"></div></div>
       <div class="card">
         <div class="card-title"><i class="ti ti-file-description"></i>Submit shift report</div>
-        <textarea id="rpt-text" placeholder="Notes, issues, inventory concerns for this shift..." style="width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:10px;color:var(--text);font-size:13px;height:90px;resize:none;outline:none"></textarea>
+        <textarea id="rpt-text" placeholder="Notes, issues, inventory concerns..." style="width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:10px;color:var(--text);font-size:13px;height:90px;resize:none;outline:none"></textarea>
         <button class="btn-primary" style="margin-top:8px" onclick="submitReport()">Submit — owner notified</button>
       </div>
       <div class="sec-hdr" style="font-size:16px;margin-top:4px"><i class="ti ti-history"></i>Task history</div>
       <div class="card"><div id="rpt-history"></div></div>
     </div>
-
-    <!-- ADMIN -->
     <div class="screen" id="screen-admin">
       <div class="sec-hdr"><i class="ti ti-settings"></i>Admin panel</div>
       <div id="admin-lock-msg" class="hidden" style="background:var(--danger-bg);border:1px solid var(--danger-text);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--danger-text);margin-bottom:12px"><i class="ti ti-lock"></i> Owner / Admin access only</div>
@@ -389,7 +350,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
       </div>
     </div>
   </div>
-
   <div class="bottom-nav">
     <button class="nav-item active" id="nav-dashboard" onclick="navTo('dashboard')"><i class="ti ti-layout-dashboard"></i><span>Home</span></button>
     <button class="nav-item" id="nav-opening" onclick="navTo('opening')"><i class="ti ti-sun"></i><span>Opening</span></button>
@@ -405,13 +365,30 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   <div class="modal" id="modal-body"></div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCjNzoFQA1Tyu_1tO_MsycEND55FUNv_B4",
+  authDomain: "ahuvas-grill-checklist-c2dc7.firebaseapp.com",
+  projectId: "ahuvas-grill-checklist-c2dc7",
+  storageBucket: "ahuvas-grill-checklist-c2dc7.firebasestorage.app",
+  messagingSenderId: "253412204742",
+  appId: "1:253412204742:web:8bedae78f1c25b261fb7c7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 var OWNER_CODE='1379';
 var DB={
-  users:[{id:'u1',name:'Owner',role:'Owner/Admin',pin:'0000'}],
-  currentUser:null,openCat:'Prep',invCat:'All',selAType:null,
-  ownerNotifs:[],shiftReports:[],
-  alerts:[{id:'a1',type:'Low inventory',msg:'Pita running low',by:'System',time:'08:42',resolved:false,sev:'danger'}],
+  users:[],currentUser:null,openCat:'Prep',invCat:'All',selAType:null,
+  openingTasks:[],closingTasks:[],readyChecks:[],inventory:[],
+  alerts:[],orderSchedule:[],taskHistory:[],shiftReports:[],ownerNotifs:[]
+};
+
+var DEFAULT_DATA = {
   openingTasks:[
     {id:'o1',name:'Check lighter for Shawarma fire',cat:'Prep',done:false,by:'',time:'',inv:false},
     {id:'o2',name:'Check Spicy Fries',cat:'Prep',done:false,by:'',time:'',inv:true},
@@ -501,7 +478,7 @@ var DB={
     {id:'i23',name:'Lemon juice',cat:'Condiments',status:'ok'},{id:'i24',name:'Mayo',cat:'Condiments',status:'ok'},
     {id:'i25',name:'Mustard',cat:'Condiments',status:'ok'},{id:'i26',name:'Ketchup packets',cat:'Condiments',status:'ok'},
     {id:'i27',name:'Sauces & dressings',cat:'Condiments',status:'ok'},
-    {id:'i28',name:'Pita',cat:'Bread',status:'ok'},{id:'i29',name:'Laffa',cat:'Bread',status:'low'},
+    {id:'i28',name:'Pita',cat:'Bread',status:'ok'},{id:'i29',name:'Laffa',cat:'Bread',status:'ok'},
     {id:'i30',name:'Buns',cat:'Bread',status:'ok'},{id:'i31',name:'Baguette',cat:'Bread',status:'ok'},
     {id:'i32',name:'Wraps',cat:'Bread',status:'ok'},
     {id:'i33',name:'Chicken (all cuts)',cat:'Proteins',status:'ok'},{id:'i34',name:'Falafel',cat:'Proteins',status:'ok'},
@@ -517,7 +494,7 @@ var DB={
     {id:'i52',name:'Catering party platter & lid',cat:'Supplies',status:'ok'},{id:'i53',name:'Forks',cat:'Supplies',status:'ok'},
     {id:'i54',name:'Cutlery kits',cat:'Supplies',status:'ok'},{id:'i55',name:'Dome lids and containers',cat:'Supplies',status:'ok'},
     {id:'i56',name:'Sandwich paper containers',cat:'Supplies',status:'ok'},{id:'i57',name:'Clean sandwich trays/plates',cat:'Supplies',status:'ok'},
-    {id:'i58',name:'Salad bar containers',cat:'Supplies',status:'ok'},{id:'i59',name:'Packaging supplies (general)',cat:'Supplies',status:'low'},
+    {id:'i58',name:'Salad bar containers',cat:'Supplies',status:'ok'},{id:'i59',name:'Packaging supplies (general)',cat:'Supplies',status:'ok'},
     {id:'i60',name:'Toothpicks',cat:'Supplies',status:'ok'},{id:'i61',name:'Greaser',cat:'Supplies',status:'ok'},
     {id:'i62',name:'Table napkins',cat:'Supplies',status:'ok'},{id:'i63',name:'Salt shakers',cat:'Supplies',status:'ok'},
     {id:'i64',name:'Gloves',cat:'Supplies',status:'ok'},{id:'i65',name:'Toilet paper',cat:'Supplies',status:'ok'},
@@ -529,35 +506,51 @@ var DB={
     {id:'ord2',item:'Laffa',checkDays:'Every morning + before closing',orderDays:'Mon & Wed',cutoff:'4:30 PM day before'},
     {id:'ord3',item:'Packaging supplies',checkDays:'Mon & Wed mornings',orderDays:'As needed',cutoff:''},
   ],
-  taskHistory:[],
 };
+
+// ── FIREBASE HELPERS ──
+async function fbSave(col, id, data){ await setDoc(doc(db, col, id), data); }
+async function fbDelete(col, id){ await deleteDoc(doc(db, col, id)); }
+async function fbGetAll(col){
+  const snap = await getDocs(collection(db, col));
+  return snap.docs.map(d=>d.data());
+}
+
+async function initDB(){
+  // Check if data exists, if not seed it
+  const snap = await getDocs(collection(db,'openingTasks'));
+  if(snap.empty){
+    for(var col of ['openingTasks','closingTasks','readyChecks','inventory','orderSchedule']){
+      for(var item of DEFAULT_DATA[col]){
+        await fbSave(col, item.id, item);
+      }
+    }
+  }
+  // Load everything
+  for(var col of ['openingTasks','closingTasks','readyChecks','inventory','orderSchedule','alerts','users','shiftReports']){
+    DB[col] = await fbGetAll(col);
+  }
+}
 
 // ── WHATSAPP ──
 async function sendWhatsApp(message){
   try{
-    await fetch('/api/whatsapp',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message})
-    });
-  }catch(e){console.warn('WhatsApp send failed:',e);}
+    await fetch('/api/whatsapp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
+  }catch(e){console.warn('WhatsApp failed:',e);}
 }
 
 // ── TOAST ──
 function showToast(title,msg,sub,duration){
-  duration=duration||6000;
+  duration=duration||5000;
   var tc=document.getElementById('toast-container');
   var id='t'+Date.now();
   var el=document.createElement('div');
   el.className='toast';el.id=id;
   el.innerHTML='<i class="ti ti-alert-triangle toast-icon"></i><div class="toast-body"><div class="toast-title">'+title+'</div><div class="toast-msg">'+msg+'</div>'+(sub?'<div class="toast-sub">'+sub+'</div>':'')+'</div><div class="toast-close" onclick="dismissToast(\''+id+'\')"><i class="ti ti-x"></i></div>';
   tc.appendChild(el);
-  setTimeout(function(){dismissToast(id);},duration);
+  setTimeout(()=>dismissToast(id),duration);
 }
-function dismissToast(id){
-  var el=document.getElementById(id);if(!el)return;
-  el.classList.add('fading');setTimeout(function(){el&&el.remove();},300);
-}
+window.dismissToast=function(id){var el=document.getElementById(id);if(!el)return;el.classList.add('fading');setTimeout(()=>el&&el.remove(),300);}
 
 // ── AUTH ──
 var crPin='',siPin='',siUser=null,crRole=null;
@@ -568,94 +561,98 @@ function authSwitch(t){
   document.getElementById('tab-'+t).classList.add('active');
   document.getElementById('sec-'+t).classList.add('active');
 }
-function buildKP(id,isSI){
+window.authSwitch=authSwitch;
+
+function buildKP(id){
   var kp=document.getElementById(id);
   var keys=['1','2','3','4','5','6','7','8','9','C','0','⌫'];
   kp.innerHTML=keys.map(k=>'<div class="key'+(k==='⌫'?' red':'')+'" onclick="kpPress(\''+id+'\',\''+k+'\')">'+(k==='⌫'?'<i class="ti ti-backspace"></i>':k)+'</div>').join('');
 }
-function kpPress(kpId,k){
+window.kpPress=function(kpId,k){
   var isSI=kpId==='si-kp',pre=isSI?'si':'cr';
   var pin=isSI?siPin:crPin;
   if(k==='C')pin='';else if(k==='⌫')pin=pin.slice(0,-1);else if(pin.length<4)pin+=k;
   if(isSI){siPin=pin;updPin('si',pin);document.getElementById('si-btn').disabled=pin.length!==4;}
   else{crPin=pin;updPin('cr',pin);}
-}
+};
 function updPin(pre,pin){
   for(var i=0;i<4;i++){var d=document.getElementById(pre+'-p'+i);if(i<pin.length){d.classList.add('filled');d.textContent='•';}else{d.classList.remove('filled');d.textContent='';}}
 }
-function filterUsers(){
-  var q=document.getElementById('si-name').value.trim().toLowerCase();
-  renderChips(q);
-}
+
 function renderChips(filter){
   var chips=document.getElementById('user-chips');
-  var list=filter?DB.users.filter(u=>u.name.toLowerCase().includes(filter)):DB.users;
-  if(!list.length){chips.innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px 0">No accounts found</div>';return;}
+  var list=filter?DB.users.filter(u=>u.name.toLowerCase().includes(filter.toLowerCase())):DB.users;
+  if(!list.length){chips.innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px">No accounts found</div>';return;}
   chips.innerHTML=list.map(u=>'<div class="user-chip" onclick="pickUser(\''+u.id+'\')"><div style="width:34px;height:34px;border-radius:50%;background:var(--accent-bg);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-user" style="color:var(--accent);font-size:14px"></i></div><div><div class="user-chip-name">'+u.name+'</div><div class="user-chip-role">'+u.role+'</div></div></div>').join('');
 }
-function pickUser(id){
+window.filterUsers=function(){renderChips(document.getElementById('si-name').value.trim());};
+window.pickUser=function(id){
   siUser=DB.users.find(u=>u.id===id);siPin='';updPin('si','');
   document.getElementById('si-name-show').textContent=siUser.name;
   document.getElementById('user-list-wrap').classList.add('hidden');
   document.getElementById('pin-step').classList.remove('hidden');
   document.getElementById('si-btn').disabled=true;
-}
-function cancelPin(){
+};
+window.cancelPin=function(){
   siUser=null;siPin='';
   document.getElementById('pin-step').classList.add('hidden');
   document.getElementById('user-list-wrap').classList.remove('hidden');
   document.getElementById('si-name').value='';renderChips('');
-}
-function doSignIn(){
+};
+window.doSignIn=function(){
   if(!siUser||siPin.length!==4)return;
-  if(siPin!==siUser.pin){showErr('signin-err','Incorrect PIN. Try again.');siPin='';updPin('si','');document.getElementById('si-btn').disabled=true;return;}
+  if(siPin!==siUser.pin){showErr('signin-err','Incorrect PIN.');siPin='';updPin('si','');document.getElementById('si-btn').disabled=true;return;}
   loginUser(siUser);
-}
-function selRole(el){
+};
+window.selRole=function(el){
   document.querySelectorAll('#cr-roles .role-btn').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');crRole=el.dataset.r;
   document.getElementById('owner-code-wrap').classList.toggle('hidden',crRole!=='Owner/Admin');
-}
-function doCreate(){
+};
+window.doCreate=async function(){
   var name=document.getElementById('cr-name').value.trim();
   if(!name)return showErr('create-err','Enter your name.');
   if(!crRole)return showErr('create-err','Select a role.');
   if(crPin.length!==4)return showErr('create-err','Choose a 4-digit PIN.');
-  if(crRole==='Owner/Admin'&&document.getElementById('cr-owner-code').value.trim()!==OWNER_CODE)return showErr('create-err','Incorrect owner verification code.');
-  if(DB.users.find(u=>u.name.toLowerCase()===name.toLowerCase()))return showErr('create-err','Account with that name already exists.');
-  DB.users.push({id:'u'+Date.now(),name,role:crRole,pin:crPin});
-  showOk('create-ok','Account created! You can now sign in.');
+  if(crRole==='Owner/Admin'&&document.getElementById('cr-owner-code').value.trim()!==OWNER_CODE)return showErr('create-err','Incorrect owner code.');
+  if(DB.users.find(u=>u.name.toLowerCase()===name.toLowerCase()))return showErr('create-err','Account already exists.');
+  var nu={id:'u'+Date.now(),name,role:crRole,pin:crPin};
+  await fbSave('users',nu.id,nu);
+  DB.users.push(nu);
+  showOk('create-ok','Account created! Sign in now.');
   document.getElementById('cr-name').value='';crPin='';crRole=null;updPin('cr','');
   document.querySelectorAll('#cr-roles .role-btn').forEach(b=>b.classList.remove('sel'));
   document.getElementById('owner-code-wrap').classList.add('hidden');
   document.getElementById('cr-owner-code').value='';
   renderChips('');
-}
+};
 function showErr(id,msg){var el=document.getElementById(id);el.innerHTML='<div class="err-msg">'+msg+'</div>';setTimeout(()=>el.innerHTML='',3500);}
 function showOk(id,msg){var el=document.getElementById(id);el.innerHTML='<div class="ok-msg">'+msg+'</div>';setTimeout(()=>el.innerHTML='',3500);}
+
 function loginUser(u){
   DB.currentUser=u;
-  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('auth-screen').classList.add('hidden');
   document.getElementById('app').style.display='flex';
   document.getElementById('bar-user').textContent=u.name+' · '+u.role;
   document.getElementById('admin-body').style.display=isOw()?'block':'none';
   document.getElementById('admin-lock-msg').classList.toggle('hidden',isOw());
-  renderAll();navTo('dashboard');renderChips('');
+  renderAll();navTo('dashboard');
 }
-function signOut(){
+window.signOut=function(){
   DB.currentUser=null;siUser=null;siPin='';crPin='';crRole=null;
-  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('auth-screen').classList.remove('hidden');
   document.getElementById('app').style.display='none';
   document.getElementById('pin-step').classList.add('hidden');
   document.getElementById('user-list-wrap').classList.remove('hidden');
   document.getElementById('si-name').value='';updPin('si','');updPin('cr','');renderChips('');
-}
+};
+
 function isOw(){return DB.currentUser&&DB.currentUser.role==='Owner/Admin';}
 function curName(){return DB.currentUser?DB.currentUser.name:'Worker';}
 function getNow(){return new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});}
 
 // ── NAV ──
-function navTo(s){
+window.navTo=function(s){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('screen-'+s).classList.add('active');
@@ -664,17 +661,13 @@ function navTo(s){
   if(s==='closing'){renderOwnerStrip('c-owner-add','add-close-task');}
   if(s==='inventory'){renderOwnerStrip('i-owner-add','add-inv');renderInventory();}
   updateBadge();
-}
+};
 function renderOwnerStrip(elId,modal){
   var el=document.getElementById(elId);if(!el)return;
   el.innerHTML=isOw()?'<div class="owner-strip" onclick="openModal(\''+modal+'\')"><i class="ti ti-plus"></i>Add item (owner only)</div>':'';
 }
 
-// ── RENDER ALL ──
-function renderAll(){
-  renderDashboard();renderOpening();renderClosing();renderInventory();
-  renderAlerts();renderReports();renderAdmin();
-}
+function renderAll(){renderDashboard();renderOpening();renderClosing();renderInventory();renderAlerts();renderReports();renderAdmin();}
 
 function renderDashboard(){
   if(isOw()&&DB.ownerNotifs.length){
@@ -693,11 +686,10 @@ function renderDashboard(){
   document.getElementById('d-pc').textContent=cp+'%';document.getElementById('pb-c').style.width=cp+'%';
   var al=DB.alerts.filter(a=>!a.resolved).slice(0,4);
   document.getElementById('d-alerts-list').innerHTML=al.length?al.map(a=>'<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)"><i class="ti ti-alert-triangle" style="color:var(--danger-text)"></i><div><div style="font-size:13px;font-weight:500">'+a.type+'</div><div style="font-size:11px;color:var(--text2)">'+a.msg+'</div><div style="font-size:10px;color:var(--text3)">'+a.by+' · '+a.time+'</div></div></div>').join(''):'<div style="font-size:13px;color:var(--text3)">No active alerts</div>';
-  document.getElementById('d-orders').innerHTML=DB.orderSchedule.map(o=>'<div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:14px;font-weight:600">'+(o.item==='Laffa'?'<span style="color:var(--danger-text)">⚠ </span>':'')+o.item+'</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Order: '+o.orderDays+(o.cutoff?' · Cutoff: <span style="color:var(--warn-text)">'+o.cutoff+'</span>':'')+'</div></div></div>').join('');
+  document.getElementById('d-orders').innerHTML=DB.orderSchedule.map(o=>'<div style="padding:10px 0;border-bottom:1px solid var(--border)"><div style="font-size:14px;font-weight:600">'+o.item+'</div><div style="font-size:11px;color:var(--text2);margin-top:2px">Order: '+o.orderDays+(o.cutoff?' · Cutoff: <span style="color:var(--warn-text)">'+o.cutoff+'</span>':'')+'</div></div>').join('');
   updateBadge();
 }
 
-// ── TASKS ──
 function renderOpening(){
   var cats=[...new Set(DB.openingTasks.map(t=>t.cat))];
   if(!cats.includes(DB.openCat))DB.openCat=cats[0]||'';
@@ -705,131 +697,146 @@ function renderOpening(){
   var filtered=DB.openingTasks.filter(t=>t.cat===DB.openCat);
   document.getElementById('open-list').innerHTML=filtered.length?filtered.map(t=>taskHTML(t,'open')).join(''):'<div style="font-size:13px;color:var(--text3);padding:10px">No tasks here</div>';
 }
-function setOCat(c){DB.openCat=c;renderOpening();}
+window.setOCat=function(c){DB.openCat=c;renderOpening();};
 
 function taskHTML(t,type){
   var meta=t.done?'Done by '+t.by+' · '+t.time:'Pending';
   var invActs=t.inv&&!t.done?'<span class="tag tag-w" onclick="flagLow(\''+t.id+'\',\''+type+'\')">Low</span><span class="tag tag-d" onclick="alertOwner(\''+t.name+'\')">Alert owner</span>':'';
-  var delBtn=isOw()?'<button class="del-btn" onclick="delTaskInline(\''+t.id+'\',\''+type+'\')" title="Delete task"><i class="ti ti-trash"></i></button>':'';
-  return '<div class="task-item'+(t.done?' done':'')+'"><div class="task-check'+(t.done?' chk':'')+'" onclick="toggleTask(\''+t.id+'\',\''+type+'\')"><i class="ti ti-check"></i></div><div class="task-body"><div class="task-name">'+t.name+'</div><div class="task-meta">'+meta+'</div></div>'+(invActs?'<div class="task-acts">'+invActs+'</div>':'')+(delBtn?'<div style="margin-left:4px">'+delBtn+'</div>':'')+'</div>';
+  var delBtn=isOw()?'<button class="del-btn" onclick="delTaskInline(\''+t.id+'\',\''+type+'\')" title="Delete"><i class="ti ti-trash"></i></button>':'';
+  return '<div class="task-item'+(t.done?' done':'')+'"><div class="task-check'+(t.done?' chk':'')+'" onclick="toggleTask(\''+t.id+'\',\''+type+'\')"><i class="ti ti-check"></i></div><div class="task-body"><div class="task-name">'+t.name+'</div><div class="task-meta">'+meta+'</div></div>'+(invActs?'<div class="task-acts">'+invActs+'</div>':'')+(delBtn?'<div>'+delBtn+'</div>':'')+'</div>';
 }
 
-function toggleTask(id,type){
+window.toggleTask=async function(id,type){
   var arr=type==='open'?DB.openingTasks:type==='close'?DB.closingTasks:DB.readyChecks;
+  var col=type==='open'?'openingTasks':type==='close'?'closingTasks':'readyChecks';
   var t=arr.find(x=>x.id===id);if(!t)return;
   t.done=!t.done;
   if(t.done){t.by=curName();t.time=getNow();DB.taskHistory.push({task:t.name,worker:curName(),time:getNow()});}
   else{t.by='';t.time='';}
+  await fbSave(col,t.id,t);
   if(type==='open')renderOpening();else renderClosing();
   renderDashboard();renderReports();
-}
+};
 
-function delTaskInline(id,type){
+window.delTaskInline=async function(id,type){
   if(!isOw())return;
   if(!confirm('Delete this task?'))return;
+  var col=type==='open'?'openingTasks':'closingTasks';
   if(type==='open')DB.openingTasks=DB.openingTasks.filter(t=>t.id!==id);
-  else if(type==='close')DB.closingTasks=DB.closingTasks.filter(t=>t.id!==id);
+  else DB.closingTasks=DB.closingTasks.filter(t=>t.id!==id);
+  await fbDelete(col,id);
   if(type==='open')renderOpening();else renderClosing();
   renderAdmin();renderDashboard();
-}
+};
 
-function flagLow(id,type){
+window.flagLow=async function(id,type){
   var arr=type==='open'?DB.openingTasks:DB.inventory;
-  var t=arr.find(x=>x.id===id)||DB.openingTasks.find(x=>x.id===id);
+  var t=arr.find(x=>x.id===id);
   var name=t?t.name:'Item';
   var a={id:'a'+Date.now(),type:'Low stock',msg:name+' is running low',by:curName(),time:getNow(),resolved:false,sev:'warn'};
   DB.alerts.push(a);
-  // toast for owner if they're logged in, otherwise will show on their dashboard
-  if(isOw())showToast('Low stock flagged',name+' has been marked low','Flagged by '+curName());
+  await fbSave('alerts',a.id,a);
   DB.ownerNotifs.push('⚠ Low stock: '+name+' flagged by '+curName()+' at '+getNow());
+  showToast('Low stock flagged',name+' marked as low','By: '+curName());
+  sendWhatsApp('⚠ LOW STOCK ALERT\nItem: '+name+'\nFlagged by: '+curName()+'\nTime: '+getNow());
   renderDashboard();renderAlerts();
-}
+};
 
-function alertOwner(name){
-  var a={id:'a'+Date.now(),type:'Urgent — owner needed',msg:name+' needs immediate attention',by:curName(),time:getNow(),resolved:false,sev:'danger'};
+window.alertOwner=async function(name){
+  var a={id:'a'+Date.now(),type:'Urgent alert',msg:name+' needs immediate attention',by:curName(),time:getNow(),resolved:false,sev:'danger'};
   DB.alerts.push(a);
-  DB.ownerNotifs.push('🚨 URGENT: '+name+' — alert from '+curName()+' at '+getNow());
-  if(isOw())showToast('Urgent alert!',name+' needs attention','From: '+curName(),8000);
-  else showToast('Alert sent!','Owner has been notified about: '+name,'',4000);
+  await fbSave('alerts',a.id,a);
+  DB.ownerNotifs.push('🚨 URGENT: '+name+' — from '+curName()+' at '+getNow());
+  showToast('Urgent alert sent!',name+' needs attention','From: '+curName(),8000);
+  sendWhatsApp('🚨 URGENT ALERT — Ahuvas Grill\nItem: '+name+'\nFrom: '+curName()+'\nTime: '+getNow());
   renderDashboard();renderAlerts();updateBadge();
-}
+};
 
 function renderClosing(){
   document.getElementById('close-list').innerHTML=DB.closingTasks.map(t=>taskHTML(t,'close')).join('');
   document.getElementById('ready-list').innerHTML=DB.readyChecks.map(r=>'<div class="task-item'+(r.done?' done':'')+'"><div class="task-check'+(r.done?' chk':'')+'" onclick="toggleTask(\''+r.id+'\',\'ready\')"><i class="ti ti-check"></i></div><div class="task-body"><div class="task-name">'+r.name+'</div><div class="task-meta">'+(r.done?'Confirmed by '+r.by:'Needs confirmation')+'</div></div></div>').join('');
 }
 
-// ── INVENTORY ──
 function renderInventory(){
   var cats=['All',...new Set(DB.inventory.map(i=>i.cat))];
   document.getElementById('inv-tabs').innerHTML=cats.map(c=>'<div class="tab'+(DB.invCat===c?' active':'')+'" onclick="setICat(\''+c+'\')">'+c+'</div>').join('');
   var filtered=DB.invCat==='All'?DB.inventory:DB.inventory.filter(i=>i.cat===DB.invCat);
   document.getElementById('inv-list').innerHTML=filtered.map(invHTML).join('');
 }
-function setICat(c){DB.invCat=c;renderInventory();}
+window.setICat=function(c){DB.invCat=c;renderInventory();};
 function invHTML(item){
-  var delBtn=isOw()?'<button class="del-btn" onclick="delInvInline(\''+item.id+'\')" title="Delete item"><i class="ti ti-trash"></i></button>':'';
+  var delBtn=isOw()?'<button class="del-btn" onclick="delInvInline(\''+item.id+'\')" title="Delete"><i class="ti ti-trash"></i></button>':'';
   return '<div class="inv-item"><div class="inv-hdr"><div class="inv-name">'+item.name+'</div><div class="inv-hdr-right"><span class="badge '+(item.status==='ok'?'bs':item.status==='low'?'bw':'bd')+'">'+item.status.toUpperCase()+'</span>'+delBtn+'</div></div><div class="inv-btns"><div class="sbt ok'+(item.status==='ok'?' a':'')+'" onclick="setIS(\''+item.id+'\',\'ok\')"><i class="ti ti-check"></i> OK</div><div class="sbt lo'+(item.status==='low'?' a':'')+'" onclick="setIS(\''+item.id+'\',\'low\')">Low</div><div class="sbt cr'+(item.status==='critical'?' a':'')+'" onclick="setIS(\''+item.id+'\',\'critical\')">Critical</div></div></div>';
 }
-function setIS(id,status){
+window.setIS=async function(id,status){
   var item=DB.inventory.find(i=>i.id===id);if(!item)return;
   item.status=status;
+  await fbSave('inventory',item.id,item);
   if(status==='critical'){
     var a={id:'a'+Date.now(),type:'Critical stock',msg:item.name+' marked CRITICAL',by:curName(),time:getNow(),resolved:false,sev:'danger'};
-    DB.alerts.push(a);
-    DB.ownerNotifs.push('🚨 CRITICAL: '+item.name+' — marked by '+curName()+' at '+getNow());
-    showToast('Critical stock alert!',item.name+' has been marked CRITICAL','By: '+curName(),8000);
+    DB.alerts.push(a);await fbSave('alerts',a.id,a);
+    DB.ownerNotifs.push('🚨 CRITICAL: '+item.name+' — by '+curName());
+    showToast('Critical stock!',item.name+' marked CRITICAL','By: '+curName(),8000);
+    sendWhatsApp('🚨 CRITICAL STOCK — Ahuvas Grill\nItem: '+item.name+'\nMarked by: '+curName()+'\nTime: '+getNow());
   } else if(status==='low'){
-    DB.ownerNotifs.push('⚠ Low stock: '+item.name+' — marked by '+curName()+' at '+getNow());
-    if(isOw())showToast('Low stock',item.name+' marked as low','By: '+curName());
-    else showToast('Noted','Low stock flagged for '+item.name,'Owner will be notified',3000);
-    DB.alerts.push({id:'a'+Date.now(),type:'Low stock',msg:item.name+' marked low',by:curName(),time:getNow(),resolved:false,sev:'warn'});
+    var a={id:'a'+Date.now(),type:'Low stock',msg:item.name+' marked low',by:curName(),time:getNow(),resolved:false,sev:'warn'};
+    DB.alerts.push(a);await fbSave('alerts',a.id,a);
+    showToast('Low stock',item.name+' marked low','By: '+curName());
+    sendWhatsApp('⚠ LOW STOCK — Ahuvas Grill\nItem: '+item.name+'\nMarked by: '+curName()+'\nTime: '+getNow());
   }
   renderInventory();renderDashboard();renderAlerts();
-}
-function delInvInline(id){
+};
+window.delInvInline=async function(id){
   if(!isOw())return;
-  if(!confirm('Remove this stock item?'))return;
+  if(!confirm('Remove this item?'))return;
   DB.inventory=DB.inventory.filter(i=>i.id!==id);
+  await fbDelete('inventory',id);
   renderInventory();renderAdmin();renderDashboard();
-}
+};
 
-// ── ALERTS ──
-function selAType(el){
+window.selAType=function(el){
   document.querySelectorAll('.atype-btn').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');DB.selAType=el.dataset.t;
-}
-function sendAlert(){
+};
+window.sendAlert=async function(){
   var note=document.getElementById('alert-note').value.trim();
   if(!DB.selAType)return alert('Select an alert type first.');
-  var a={id:'a'+Date.now(),type:DB.selAType,msg:note||'No additional details',by:curName(),time:getNow(),resolved:false,sev:'danger'};
-  DB.alerts.push(a);
-  DB.ownerNotifs.push('🚨 Alert from '+curName()+': '+DB.selAType+(note?' — '+note.slice(0,60):''));
-  showToast('Alert sent!',DB.selAType,'From '+curName()+' at '+getNow());
+  var a={id:'a'+Date.now(),type:DB.selAType,msg:note||'No details',by:curName(),time:getNow(),resolved:false,sev:'danger'};
+  DB.alerts.push(a);await fbSave('alerts',a.id,a);
+  DB.ownerNotifs.push('🚨 Alert from '+curName()+': '+DB.selAType);
+  sendWhatsApp('🚨 ALERT — Ahuvas Grill\nType: '+DB.selAType+'\nNote: '+(note||'No details')+'\nFrom: '+curName()+'\nTime: '+getNow());
+  showToast('Alert sent!',DB.selAType,'From: '+curName());
   document.getElementById('alert-note').value='';
   document.querySelectorAll('.atype-btn').forEach(b=>b.classList.remove('sel'));
   DB.selAType=null;
   renderAlerts();renderDashboard();updateBadge();
-}
+};
 function renderAlerts(){
   var log=document.getElementById('alert-log');
   if(!DB.alerts.length){log.innerHTML='<div style="font-size:13px;color:var(--text3)">No alerts yet</div>';return;}
   log.innerHTML=[...DB.alerts].reverse().map(a=>'<div class="alert-item '+(a.resolved?'resolved':a.sev==='warn'?'warn':a.sev==='report'?'report':'')+'"><div class="alert-hdr"><span class="alert-type">'+a.type+'</span><span class="alert-time">'+a.time+'</span></div><div class="alert-msg">'+a.msg+'</div><div class="alert-by">'+a.by+'</div>'+(isOw()&&!a.resolved?'<button class="btn-sm s" style="margin-top:8px" onclick="resolveA(\''+a.id+'\')">Mark resolved</button>':'')+'</div>').join('');
 }
-function resolveA(id){var a=DB.alerts.find(x=>x.id===id);if(a)a.resolved=true;renderAlerts();renderDashboard();updateBadge();}
+window.resolveA=async function(id){
+  var a=DB.alerts.find(x=>x.id===id);if(!a)return;
+  a.resolved=true;await fbSave('alerts',a.id,a);
+  renderAlerts();renderDashboard();updateBadge();
+};
 function updateBadge(){document.getElementById('alert-dot').style.display=DB.alerts.filter(a=>!a.resolved).length?'block':'none';}
 
-// ── REPORTS ──
-function submitReport(){
+window.submitReport=async function(){
   var txt=document.getElementById('rpt-text').value.trim();
   if(!txt)return alert('Write something before submitting.');
-  DB.shiftReports.push({by:curName(),time:getNow(),text:txt});
-  DB.alerts.push({id:'a'+Date.now(),type:'Shift report',msg:txt.slice(0,100)+(txt.length>100?'...':''),by:curName(),time:getNow(),resolved:false,sev:'report'});
+  var r={id:'r'+Date.now(),by:curName(),time:getNow(),text:txt};
+  DB.shiftReports.push(r);await fbSave('shiftReports',r.id,r);
+  var a={id:'a'+Date.now(),type:'Shift report',msg:txt.slice(0,100),by:curName(),time:getNow(),resolved:false,sev:'report'};
+  DB.alerts.push(a);await fbSave('alerts',a.id,a);
   DB.ownerNotifs.push('📋 Shift report from '+curName()+' at '+getNow());
-  showToast('Report submitted','Owner has been notified','From: '+curName()+' · '+getNow(),5000);
+  sendWhatsApp('📋 SHIFT REPORT — Ahuvas Grill\nFrom: '+curName()+'\nTime: '+getNow()+'\n\n'+txt);
+  showToast('Report submitted','Owner has been notified','From: '+curName());
   document.getElementById('rpt-text').value='';
   renderReports();renderAlerts();renderDashboard();updateBadge();
-}
+};
+
 function renderReports(){
   var od=DB.openingTasks.filter(t=>t.done).length,cd=DB.closingTasks.filter(t=>t.done).length;
   var low=DB.inventory.filter(i=>i.status!=='ok').length,act=DB.alerts.filter(a=>!a.resolved).length;
@@ -838,7 +845,6 @@ function renderReports(){
   document.getElementById('rpt-history').innerHTML=all.length?all.map(h=>'<div class="rpt-row"><div><div style="font-size:13px">'+h.task+'</div><div style="font-size:11px;color:var(--text2)">'+h.worker+' · '+h.time+'</div></div><span class="badge bs">Done</span></div>').join(''):'<div style="font-size:13px;color:var(--text3)">No tasks completed yet</div>';
 }
 
-// ── ADMIN ──
 function renderAdmin(){
   if(!isOw())return;
   document.getElementById('adm-workers').innerHTML=DB.users.map(u=>'<div class="admin-row"><div style="width:32px;height:32px;border-radius:50%;background:var(--accent-bg);border:1px solid var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-user" style="color:var(--accent);font-size:13px"></i></div><div class="admin-row-txt"><div>'+u.name+'</div><div class="admin-row-meta">'+u.role+' · PIN: '+u.pin+'</div></div><button class="btn-sm d" onclick="delUser(\''+u.id+'\')"><i class="ti ti-trash"></i></button></div>').join('');
@@ -848,14 +854,14 @@ function renderAdmin(){
   document.getElementById('adm-orders').innerHTML=DB.orderSchedule.map(o=>'<div class="admin-row"><div class="admin-row-txt"><div>'+o.item+'</div><div class="admin-row-meta">Check: '+o.checkDays+' · Order: '+o.orderDays+(o.cutoff?' · Cutoff: '+o.cutoff:'')+'</div></div><button class="btn-sm d" onclick="delOrd(\''+o.id+'\')"><i class="ti ti-trash"></i></button></div>').join('');
   document.getElementById('adm-reports').innerHTML=DB.shiftReports.length?[...DB.shiftReports].reverse().map(r=>'<div class="alert-item report" style="margin-bottom:8px"><div class="alert-hdr"><span class="alert-type">Shift report</span><span class="alert-time">'+r.time+'</span></div><div class="alert-msg">'+r.text+'</div><div class="alert-by">'+r.by+'</div></div>').join(''):'<div style="font-size:13px;color:var(--text3)">No reports yet</div>';
 }
-function delUser(id){if(confirm('Remove this account?')){DB.users=DB.users.filter(u=>u.id!==id);renderAdmin();}}
-function delOpenA(id){if(confirm('Delete this task?')){DB.openingTasks=DB.openingTasks.filter(t=>t.id!==id);renderAll();}}
-function delCloseA(id){if(confirm('Delete this task?')){DB.closingTasks=DB.closingTasks.filter(t=>t.id!==id);renderAll();}}
-function delInvA(id){if(confirm('Remove this item?')){DB.inventory=DB.inventory.filter(i=>i.id!==id);renderAll();}}
-function delOrd(id){if(confirm('Delete this schedule?')){DB.orderSchedule=DB.orderSchedule.filter(o=>o.id!==id);renderAll();}}
+window.delUser=async function(id){if(confirm('Remove?')){DB.users=DB.users.filter(u=>u.id!==id);await fbDelete('users',id);renderAdmin();}};
+window.delOpenA=async function(id){if(confirm('Delete?')){DB.openingTasks=DB.openingTasks.filter(t=>t.id!==id);await fbDelete('openingTasks',id);renderAll();}};
+window.delCloseA=async function(id){if(confirm('Delete?')){DB.closingTasks=DB.closingTasks.filter(t=>t.id!==id);await fbDelete('closingTasks',id);renderAll();}};
+window.delInvA=async function(id){if(confirm('Remove?')){DB.inventory=DB.inventory.filter(i=>i.id!==id);await fbDelete('inventory',id);renderAll();}};
+window.delOrd=async function(id){if(confirm('Delete?')){DB.orderSchedule=DB.orderSchedule.filter(o=>o.id!==id);await fbDelete('orderSchedule',id);renderAll();}};
 
 // ── MODALS ──
-function openModal(type){
+window.openModal=function(type){
   var m=document.getElementById('modal-body'),html='';
   if(type==='add-open-task'){
     var cats=[...new Set(DB.openingTasks.map(t=>t.cat))];
@@ -866,41 +872,53 @@ function openModal(type){
     var icats=[...new Set(DB.inventory.map(i=>i.cat))];
     html='<h3>Add stock item</h3><input id="m-iname" placeholder="Item name"><input id="m-icat" placeholder="Category" list="icl"><datalist id="icl">'+icats.map(c=>'<option value="'+c+'">').join('')+'</datalist><div class="modal-footer"><button class="btn-sm" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="addInv()">Add</button></div>';
   } else if(type==='add-order'){
-    html='<h3>Add ordering schedule</h3><input id="m-oitem" placeholder="Item name"><input id="m-ochk" placeholder="Check days (e.g. Every morning)"><input id="m-oord" placeholder="Order days (e.g. Mon & Wed)"><input id="m-ocut" placeholder="Cutoff time (optional)"><div class="modal-footer"><button class="btn-sm" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="addOrder()">Add</button></div>';
+    html='<h3>Add ordering schedule</h3><input id="m-oitem" placeholder="Item name"><input id="m-ochk" placeholder="Check days"><input id="m-oord" placeholder="Order days"><input id="m-ocut" placeholder="Cutoff time (optional)"><div class="modal-footer"><button class="btn-sm" onclick="closeModal()">Cancel</button><button class="btn-primary" onclick="addOrder()">Add</button></div>';
   }
   m.innerHTML=html;
   document.getElementById('modal-overlay').classList.add('open');
-}
-function mOvClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
-function addOpenTask(){
+};
+window.mOvClick=function(e){if(e.target===document.getElementById('modal-overlay'))closeModal();};
+window.closeModal=function(){document.getElementById('modal-overlay').classList.remove('open');};
+window.addOpenTask=async function(){
   var n=document.getElementById('m-tname').value.trim(),c=document.getElementById('m-tcat').value.trim()||'General';
   var inv=document.getElementById('m-tinv').checked;
   if(!n)return alert('Enter a task name.');
-  DB.openingTasks.push({id:'o'+Date.now(),name:n,cat:c,done:false,by:'',time:'',inv});
+  var t={id:'o'+Date.now(),name:n,cat:c,done:false,by:'',time:'',inv};
+  DB.openingTasks.push(t);await fbSave('openingTasks',t.id,t);
   closeModal();renderAll();
-}
-function addCloseTask(){
+};
+window.addCloseTask=async function(){
   var n=document.getElementById('m-cname').value.trim();
   if(!n)return alert('Enter a task name.');
-  DB.closingTasks.push({id:'c'+Date.now(),name:n,done:false,by:'',time:''});
+  var t={id:'c'+Date.now(),name:n,done:false,by:'',time:''};
+  DB.closingTasks.push(t);await fbSave('closingTasks',t.id,t);
   closeModal();renderAll();
-}
-function addInv(){
+};
+window.addInv=async function(){
   var n=document.getElementById('m-iname').value.trim(),c=document.getElementById('m-icat').value.trim()||'General';
   if(!n)return alert('Enter an item name.');
-  DB.inventory.push({id:'i'+Date.now(),name:n,cat:c,status:'ok'});
+  var i={id:'i'+Date.now(),name:n,cat:c,status:'ok'};
+  DB.inventory.push(i);await fbSave('inventory',i.id,i);
   closeModal();renderAll();
-}
-function addOrder(){
+};
+window.addOrder=async function(){
   var item=document.getElementById('m-oitem').value.trim(),ord=document.getElementById('m-oord').value.trim();
   if(!item||!ord)return alert('Enter item and order days.');
-  DB.orderSchedule.push({id:'ord'+Date.now(),item,checkDays:document.getElementById('m-ochk').value.trim()||'Daily',orderDays:ord,cutoff:document.getElementById('m-ocut').value.trim()});
+  var o={id:'ord'+Date.now(),item,checkDays:document.getElementById('m-ochk').value.trim()||'Daily',orderDays:ord,cutoff:document.getElementById('m-ocut').value.trim()};
+  DB.orderSchedule.push(o);await fbSave('orderSchedule',o.id,o);
   closeModal();renderAll();
-}
+};
 
 // ── INIT ──
-buildKP('si-kp',true);buildKP('cr-kp',false);renderChips('');
+buildKP('si-kp');buildKP('cr-kp');
+initDB().then(()=>{
+  document.getElementById('loading-screen').style.display='none';
+  document.getElementById('auth-screen').classList.remove('hidden');
+  renderChips('');
+}).catch(e=>{
+  console.error(e);
+  document.getElementById('loading-screen').querySelector('p').textContent='Connection error. Check internet.';
+});
 </script>
 </body>
 </html>
