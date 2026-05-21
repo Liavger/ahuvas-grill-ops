@@ -1,5 +1,7 @@
 [build]
-  functions = "netlify/functions"
+  base = "ahuvas-grill-ops"
+  functions = "ahuvas-grill-ops/netlify/functions"
+  publish = "ahuvas-grill-ops"
 
 [[redirects]]
   from = "/api/*"
